@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -33,7 +32,11 @@ func (*myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	stringSlice := strings.Split(r.URL.String(), "=")
-	fmt.Printf("%v\n", stringSlice)
 
-	io.WriteString(w, stringSlice[1])
+	if strings.Compare(stringSlice[0], "/GET/myname?name") == 0 && len(stringSlice) > 1 {
+		io.WriteString(w, stringSlice[1])
+	} else {
+		io.WriteString(w, "Please enter proper input")
+	}
+
 }
