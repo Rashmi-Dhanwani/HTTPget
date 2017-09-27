@@ -33,7 +33,7 @@ func (*myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	stringSlice := strings.Split(r.URL.String(), "=")
 
-	if strings.Compare(stringSlice[0], "/GET/myname?name") == 0 && len(stringSlice) == 2 {
+	if strings.Compare(stringSlice[0], "/GET/myname?name") == 0 && len(stringSlice) > 1 {
 		io.WriteString(w, stringSlice[1])
 	} else {
 		io.WriteString(w, "Please enter proper input")
